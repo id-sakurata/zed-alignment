@@ -1,0 +1,15 @@
+id = "alignment-extension"
+name = "Alignment"
+version = "0.0.1"
+schema_version = 1
+authors = ["Antigravity <bot@example.com>"]
+description = "Text Alignment"
+repository = "https://github.com/example/alignment"
+
+[language_servers.alignment-server]
+name = "Alignment Server"
+languages = [
+    "Rust", "TypeScript", "JavaScript", "Python", "Go",
+    "C", "C++", "C#", "HTML", "CSS", "JSON", "Markdown",
+    "PHP", "Ruby", "Swift", "Dart", "Zig", "YAML", "XML", "Plain Text", "TOML"
+]

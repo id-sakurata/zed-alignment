@@ -1,0 +1,13 @@
+# Rust
+/target/
+**/*.rs.bk
+Cargo.lock
+
+# Node.js
+node_modules/
+logs
+*.log
+npm-debug.log*
+
+# Zed
+extension.wasm
