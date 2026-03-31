@@ -10,7 +10,14 @@ const { TextDocument } = require('vscode-languageserver-textdocument');
 const connection = createConnection(ProposedFeatures.all);
 const documents = new TextDocuments(TextDocument);
 
-connection.onInitialize(() => {
+let additionalSeparators = [];
+
+connection.onInitialize((params) => {
+    let opts = params.initializationOptions || {};
+    if (opts.additional_separators && Array.isArray(opts.additional_separators)) {
+        additionalSeparators = opts.additional_separators;
+    }
+    
     return {
         capabilities: {
             textDocumentSync: TextDocumentSyncKind.Full,
@@ -35,7 +42,8 @@ connection.onCodeAction((params) => {
     if (startLine >= lines.length || endLine >= lines.length) return null;
     
     const selectedLines = lines.slice(startLine, endLine + 1);
-    const alignChars = ["=>", "=", ":"];
+    const baseAlignChars = ["=>", "=", ":"];
+    const alignChars = [...new Set([...additionalSeparators, ...baseAlignChars])];
     
     let maxPosition = 0;
     let alignChar = '';
